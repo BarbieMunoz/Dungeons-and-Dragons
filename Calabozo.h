@@ -9,14 +9,14 @@ using namespace std;
 class Calabozo {
 private:
 	ListaD<Cuarto> listaCuartos;
-	// constante del tamaÒo de la lista que siempre ser· 20
-	const int SIZE_LISTA = 5;
+	// constante del tama√±o de la lista que siempre ser√° 20
+	const int SIZE_LISTA = 20;
 
 public:
 	Calabozo();
 	~Calabozo();
 
-	// crea el calabozo usando el cat·logo de monstruos
+	// crea el calabozo usando el cat√°logo de monstruos
 	bool createCalabozo(Catalogo& catalogo);
 	bool printCalabozo(void);
 
