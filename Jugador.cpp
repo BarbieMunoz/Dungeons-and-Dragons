@@ -115,6 +115,7 @@ void Jugador::incrememtMp(int increment) {
 }
 
 bool Jugador::printMonstruosDerrotados() {
+	cout << "\nMonsters defeated:" << endl;
 	monstruosDerrotados.printLista();
 	return true;
 }
@@ -124,7 +125,5 @@ bool Jugador::printJugador() {
 	cout << "Hit points: " << getHp() << endl;
 	cout << "Player Race: " << getRace() << endl;
 	cout << "Magic Points: " << getMp() << endl;
-	cout << "Monsters defeated: " << endl;
-	printMonstruosDerrotados();
 	return true;
 }
