@@ -27,4 +27,6 @@ public:
 
 	// funciones friend son funciones externas que tienen acceso a miembros privados
 	friend ostream& operator<<(ostream& os, const Monstruo& monster);
+
+	bool printMonstruo(void);
 };
