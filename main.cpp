@@ -6,49 +6,46 @@
 #include "Calabozo.h"
 #include "Jugador.h"
 
+using namespace std;
+
 #define fileName "monsters.csv"
 
 int main() {
-	Catalogo obj1;
-	
-	if (!obj1.cargarCsv(fileName)) {
-		std::cerr << "Error al cargar el archivo CSV." << std::endl;
+	Catalogo catalogoNuevo;
+
+	if (!catalogoNuevo.cargarCsv(fileName)) {
+		cout << "There was an error while opening the csv file." << endl;
 		return 1;
 	}
 
-	//obj1.printCatalogo();
-	//cout << obj1.getSize();
-
-	/*
-	Monstruo* monstruoRandom = obj1.randomMonster();
-	cout << "\nMonstruo random:" << endl;
-	monstruoRandom->printInfo();
-
-	delete monstruoRandom;
-	*/
-
-	/*
-	Cuarto cuarto1(obj1);
-	Cuarto cuarto2(obj1);
-	cout << *cuarto1.getMonstruo() << endl;
-	cout << *cuarto2.getMonstruo() << endl;
-	*/
+	cout << "\nCreating your dungeon..." << endl;
 
 	Calabozo calabozoNuevo;
-	calabozoNuevo.createCalabozo(obj1);
+	calabozoNuevo.createCalabozo(catalogoNuevo);
 	calabozoNuevo.printCalabozo();
-	
-	
-	Jugador jugador1("Barbie");
-	jugador1.incrementHp(10);
-	jugador1.decrementMp(30);
+
+	cout << "\nDungeon created succesfully." << endl;
+	cout << "\n************************************Starting your game************************************" << endl;
+
+	string name;
+	cout << "\nInsert your player's name: ";
+	cin >> name;
+
+	Jugador jugador1(name);
 	jugador1.printJugador();
 
-	jugador1.addMonstruosDerrotados(calabozoNuevo, 1);
-	jugador1.addMonstruosDerrotados(calabozoNuevo, 3);
-	jugador1.addMonstruosDerrotados(calabozoNuevo, 7);
+	// se incrementa el mp solo para que se observe su funcionamiento
+	cout << "You have gained a bonus and your magic points have increased by 30!" << endl;
+	jugador1.incrememtMp(30);
+	jugador1.printJugador();
 
-	jugador1.printMonstruosDerrotados();
+	cout << "\nYou just defeated the monster from the second and fifth room, congratulations!" << endl;
+
+	jugador1.addMonstruosDerrotados(calabozoNuevo, 2);
+	jugador1.addMonstruosDerrotados(calabozoNuevo, 5);
+
+	cout << "\nHere are your results: " << endl;
+	jugador1.printJugador();
 
 	return 0;
 }
