@@ -11,7 +11,7 @@ Cuarto::~Cuarto() {
 }
 
 bool Cuarto::insertMonster(Catalogo& catalogo) {
-	// caso en el que el cuarto ya tenía un monstruo se verifica accediendo a su cr
+	// caso en el que el cuarto ya tenÃ­a un monstruo se verifica accediendo a su cr
 	if (monstruo.getAc() > 0) {
 		return false;
 	}
@@ -21,11 +21,10 @@ bool Cuarto::insertMonster(Catalogo& catalogo) {
 
 	// caso en el que monstruo no se haya creado bien
 	if (!monstruoCatalogo) {
-		cerr << "There was an error selecting a monster from the catalog." << endl;
 		return false;
 	}
 
-	// se realiza una copia del monstruo para evitar modificar los mosntruos del catálogo
+	// se realiza una copia del monstruo para evitar modificar los mosntruos del catÃ¡logo
 	monstruo = *monstruoCatalogo;
 
 	return true;
@@ -35,7 +34,7 @@ Monstruo Cuarto::getMonstruo() {
 	return monstruo;
 }
 
-// sobrecarga de operador << para imprimir el cuarto más el el monstruo desreferenciado
+// sobrecarga de operador << para imprimir el cuarto mÃ¡s el el monstruo desreferenciado
 ostream& operator<<(ostream& os, const Cuarto& cuarto) {
 	os << "Room with: " << "\n" << cuarto.monstruo << endl;
 	return os;
