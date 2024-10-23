@@ -25,7 +25,7 @@ int main() {
 	calabozoNuevo.printCalabozo();
 
 	cout << "\nDungeon created succesfully." << endl;
-	cout << "\n************************************Starting your game************************************" << endl;
+	cout << "\n************************************ Starting your game ************************************" << endl;
 
 	string name;
 	cout << "\nInsert your player's name: ";
