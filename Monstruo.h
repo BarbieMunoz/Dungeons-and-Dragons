@@ -15,7 +15,7 @@ private:
 	string align;
 
 public:
-	Monstruo(string name, float cr, string type, string size, int ac, int hp, string align);
+	Monstruo(string name, double cr, string type, string size, int ac, int hp, string align);
 	Monstruo();
 	~Monstruo();
 

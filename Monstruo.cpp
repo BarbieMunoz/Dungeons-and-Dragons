@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Monstruo::Monstruo(string name, float cr, string type, string size, int ac, int hp, string align) {
+Monstruo::Monstruo(string name, double cr, string type, string size, int ac, int hp, string align) {
 	this->name = name;
 	this->cr = cr;
 	this->type = type;
