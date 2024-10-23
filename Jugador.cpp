@@ -11,11 +11,11 @@ Jugador::Jugador() {
 	race = setRace();
 	mp = 100;
 
-	// semilla para la función de establecer la raza
+	// semilla para la funciÃ³n de establecer la raza
 	srand(time(0));
 }
 
-// constructor parametrizado solamente con el nombre pues los demás valores ya son asignados
+// constructor parametrizado solamente con el nombre pues los demÃ¡s valores ya son asignados
 Jugador::Jugador(string name) {
 	this->name = name;
 	hp = 100;
@@ -33,9 +33,9 @@ void Jugador::setName(string name) {
 	this->name = name;
 }
 
-// la raza del jugador se seleccionará de manera aleatoria
+// la raza del jugador se seleccionarÃ¡ de manera aleatoria
 string Jugador::setRace() {
-	// número aleatorio de 0 a 2
+	// nÃºmero aleatorio de 0 a 2
 	int valorAleatorio = rand() % 3;
 
 	switch (valorAleatorio) {
@@ -49,7 +49,6 @@ string Jugador::setRace() {
 		race = "dwarf";
 		break;
 	defualt:
-		cerr << "There was an error initializing the race." << endl;
 		break;
 	}
 
@@ -64,7 +63,7 @@ void Jugador::addMonstruosDerrotados(Calabozo& calabozo, int numCuarto) {
 	Cuarto* cuartoEncontrado;
 	cuartoEncontrado = listaCalabozo.buscarNodo(numCuarto);
 
-	// caso en el que se devolvió un nullptr
+	// caso en el que se devolviÃ³ un nullptr
 	if (!cuartoEncontrado) {
 		return;
 	}
@@ -76,10 +75,8 @@ void Jugador::addMonstruosDerrotados(Calabozo& calabozo, int numCuarto) {
 		return;
 	}
 
-	cout << "Monstruo encontrado" << endl;
 	// se agrega el monstruo en orden de acuerdo a sus nombres
 	monstruosDerrotados.insertarOrden(monstruoEcontrado);
-	cout << "Monstruo agregadoo" << endl;
 }
 
 string Jugador::getName() {
