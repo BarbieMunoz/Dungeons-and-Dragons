@@ -21,10 +21,12 @@ int main() {
 	cout << "\nCreating your dungeon..." << endl;
 
 	Calabozo calabozoNuevo;
-	calabozoNuevo.createCalabozo(catalogoNuevo);
+	if (!calabozoNuevo.createCalabozo(catalogoNuevo)) {
+		cout << "There was an error creating the dungeon." << endl;
+	}
 	calabozoNuevo.printCalabozo();
 
-	cout << "\nDungeon created succesfully." << endl;
+	cout << "Dungeon created succesfully." << endl;
 	cout << "\n************************************ Starting your game ************************************" << endl;
 
 	string name;
@@ -35,7 +37,7 @@ int main() {
 	jugador1.printJugador();
 
 	// se incrementa el mp solo para que se observe su funcionamiento
-	cout << "You have gained a bonus and your magic points have increased by 30!" << endl;
+	cout << "\nYou have gained a bonus and your magic points have increased by 30!" << endl;
 	jugador1.incrememtMp(30);
 	jugador1.printJugador();
 
@@ -44,8 +46,9 @@ int main() {
 	jugador1.addMonstruosDerrotados(calabozoNuevo, 2);
 	jugador1.addMonstruosDerrotados(calabozoNuevo, 5);
 
-	cout << "\nHere are your results: " << endl;
+	cout << "Here are your results: " << endl;
 	jugador1.printJugador();
+	jugador1.printMonstruosDerrotados();
 
 	return 0;
 }
