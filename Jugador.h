@@ -1,11 +1,3 @@
-/*
-Un jugador cuenta con un nivel de hp (hit points) que inicia en 100
-y se incrementa al ganar una batalla en un calabozo,
-una raza (elf, human or dwarf), nombre, mp (magic points)
-que decrecen al utilizar un hechizo, inicia en 100 puntos y
-puede llegar a 999, y una lista de los monstruos que ha derrotado.
-*/
-
 #pragma once
 #include <string>
 #include <iostream>
