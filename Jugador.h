@@ -28,7 +28,7 @@ public:
 	string getName(void);
 	int getHp(void);
 	string getRace(void);
-	int getMp();
+	int getMp(void);
 
 	void incrementHp(int increment);
 	void decrementMp(int decrement);
