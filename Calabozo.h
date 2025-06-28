@@ -2,23 +2,21 @@
 #include <string>
 #include <iostream>
 #include "Cuarto.h"
-#include "ListaD.h"
+#include "Grafo.h"
 
 using namespace std;
 
 class Calabozo {
 private:
-	ListaD<Cuarto> listaCuartos;
-	// constante del tamaño de la lista que siempre será 20
-	const int SIZE_LISTA = 20;
+	Grafo<Cuarto> grafoCuartos;
 
 public:
 	Calabozo();
 	~Calabozo();
 
-	// crea el calabozo usando el catálogo de monstruos
-	bool createCalabozo(Catalogo& catalogo);
+	// crea el calabozo usando el cat�logo de monstruos
+	bool createCalabozo(Catalogo& catalogo, const string& file);
 	bool printCalabozo(void);
 
-	ListaD<Cuarto>& getCalabozo(void);
+	Grafo<Cuarto>& getCalabozo(void);
 };
