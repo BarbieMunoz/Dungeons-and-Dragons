@@ -160,7 +160,7 @@ private:
 			return nodo;
 		}
 		
-		// si no se cumplió la posición con el contador, pasa al arbol derecho
+		// si no se cumpli� la posici�n con el contador, pasa al arbol derecho
 		return recorrerArbolRecursivo(nodo->right, posicion, contador);
 	}
 
