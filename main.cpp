@@ -9,8 +9,10 @@
 using namespace std;
 
 #define fileName "monsters.csv"
+#define fileDungeon "dungeon.txt"
 
 int main() {
+	// se crea catalogo
 	Catalogo catalogoNuevo;
 
 	if (!catalogoNuevo.cargarCsv(fileName)) {
@@ -20,13 +22,18 @@ int main() {
 
 	cout << "\nCreating your dungeon..." << endl;
 
+	// se crea el calabozo
 	Calabozo calabozoNuevo;
-	if (!calabozoNuevo.createCalabozo(catalogoNuevo)) {
+
+	if (!calabozoNuevo.createCalabozo(catalogoNuevo, fileDungeon)) {
 		cout << "There was an error creating the dungeon." << endl;
+		return 1;
 	}
 	calabozoNuevo.printCalabozo();
 
-	cout << "Dungeon created succesfully." << endl;
+	cout << "\n\nDungeon created succesfully." << endl;
+
+	// parte de "juego" solo para ver funcionamiento y simulacion
 	cout << "\n************************************ Starting your game ************************************" << endl;
 
 	string name;
@@ -36,7 +43,6 @@ int main() {
 	Jugador jugador1(name);
 	jugador1.printJugador();
 
-	// se incrementa el mp solo para que se observe su funcionamiento
 	cout << "\nYou have gained a bonus and your magic points have increased by 30!" << endl;
 	jugador1.incrememtMp(30);
 	jugador1.printJugador();
