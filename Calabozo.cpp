@@ -7,39 +7,41 @@ using namespace std;
 Calabozo::Calabozo() {}
 
 Calabozo::~Calabozo() {
-	// elimina la lista en el momento en el que el destructor se ejecuta para evitar memory leaks
-	listaCuartos.eliminarLista();
+	// elimina el grafo
+	grafoCuartos.eraseGrafo();
 }
 
-bool Calabozo::createCalabozo(Catalogo& catalogo) {
-	// caso en el que el calabozo ya estaba lleno
-	if (listaCuartos.getSize() >= SIZE_LISTA) {
+bool Calabozo::createCalabozo(Catalogo& catalogo, const string& file) {
+	// se lee el txt
+	if (!grafoCuartos.cargarArchivo(file)) {
 		return false;
 	}
-	for (int i = 0; i < SIZE_LISTA; i++) {
-		// se crea nuevo cuarto cada iteración para tener diferentes
+
+	for (int i = 0; i < grafoCuartos.getSize(); i++) {
+		// se crea nuevo cuarto cada iteraci�n para tener diferentes
 		Cuarto newCuarto;
 
 		// caso en el que hubo un error en insertar el monstruo
-		// condición en la que revisa si el método de insertar el monstruo es true o false
 		if (!newCuarto.insertMonster(catalogo)) {
 			return false;
 		}
 
-		// se inserta al calabozo
-		listaCuartos.insertarDatoPrincipio(newCuarto);
+		// se conecta el cuarto al v�rtice
+		if (!grafoCuartos.asignaVertice(i, newCuarto)) {
+			return false;
+		}
 	}
 	return true;
 }
 
+
+// CAMBIAR
 bool Calabozo::printCalabozo() {
-	// se utiliza el método de la lista doblemente ligada para imprimir los datos
-	// con la sobrecarga del operador << hace que se pueda imprimir el cuarto con su monstruo
-	listaCuartos.printLista();
+	grafoCuartos.imprimir();
 	return true;
 }
 
-// regresa la referencia a la lista para no hace copias
-ListaD<Cuarto>& Calabozo::getCalabozo() {
-	return listaCuartos;
+// regresa la referencia al grafo para no hacer copias
+Grafo<Cuarto>& Calabozo::getCalabozo() {
+	return grafoCuartos;
 }
