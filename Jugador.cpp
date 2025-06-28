@@ -11,11 +11,11 @@ Jugador::Jugador() {
 	race = setRace();
 	mp = 100;
 
-	// semilla para la función de establecer la raza
+	// semilla para la funci�n de establecer la raza
 	srand(time(0));
 }
 
-// constructor parametrizado solamente con el nombre pues los demás valores ya son asignados
+// constructor parametrizado solamente con el nombre pues los dem�s valores ya son asignados
 Jugador::Jugador(string name) {
 	this->name = name;
 	hp = 100;
@@ -33,9 +33,9 @@ void Jugador::setName(string name) {
 	this->name = name;
 }
 
-// la raza del jugador se seleccionará de manera aleatoria
+// la raza del jugador se seleccionar� de manera aleatoria
 string Jugador::setRace() {
-	// número aleatorio de 0 a 2
+	// n�mero aleatorio de 0 a 2
 	int valorAleatorio = rand() % 3;
 
 	switch (valorAleatorio) {
@@ -57,13 +57,18 @@ string Jugador::setRace() {
 
 void Jugador::addMonstruosDerrotados(Calabozo& calabozo, int numCuarto) {
 	// se crea una lista doblemente ligada que va a almacenar la lista de los cuartos del calabozo y se refencia al objeto de la lista
-	ListaD<Cuarto>& listaCalabozo = calabozo.getCalabozo();
+	Grafo<Cuarto>& grafoCalabozo = calabozo.getCalabozo();
+
+	// valida num de cuarto
+	if (numCuarto < 0 || numCuarto >= grafoCalabozo.getSize()) {
+		return;
+	}
 
 	// se regresa el dato del nodo de la lista, porque lo que se quiere es el cuarto, no el nodoCuarto
 	Cuarto* cuartoEncontrado;
-	cuartoEncontrado = listaCalabozo.buscarNodo(numCuarto);
+	cuartoEncontrado = grafoCalabozo.obtenerVertice(numCuarto);
 
-	// caso en el que se devolvió un nullptr
+	// caso en el que se devolvi� un nullptr
 	if (!cuartoEncontrado) {
 		return;
 	}
@@ -76,7 +81,9 @@ void Jugador::addMonstruosDerrotados(Calabozo& calabozo, int numCuarto) {
 	}
 
 	// se agrega el monstruo en orden de acuerdo a sus nombres
-	monstruosDerrotados.insertarOrden(monstruoEcontrado);
+	if (!monstruosDerrotados.insertarOrden(monstruoEcontrado)) {
+		return;
+	}
 }
 
 string Jugador::getName() {
