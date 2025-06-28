@@ -14,23 +14,20 @@ private:
 public:
 	ListaD() : head(nullptr) {}
 
+	ListaD(int size) : head(nullptr), size(size) {}
+
 	~ListaD() {
 		eliminarLista();
 	}
 
 	void printLista() {
 		NodoLista<T>* tmp = head;
-		// variable que ayuda a tener orden al imprimir los datos
-		int contador = 1;
 
 		// mientras no sea nullptr
 		while (tmp) {
-			cout << "\n" << contador << "." << endl;
 			cout << tmp->dato << " ";
 			tmp = tmp->next;
-			contador++;
 		}
-		cout << "\n";
 	}
 
 	void eliminarLista() {
@@ -55,6 +52,7 @@ public:
 		}
 		head = newNodo;
 
+		size++;
 		return true;
 	}
 
@@ -69,6 +67,7 @@ public:
 		anterior->next = nullptr;
 		delete tmp;
 		tmp = nullptr;
+		size--;
 		return true;
 	}
 
@@ -82,6 +81,7 @@ public:
 
 		if (!head) {
 			head = newNodo;
+			size++;
 			return true;
 		}
 
@@ -92,6 +92,7 @@ public:
 
 		tmp->next = newNodo;
 		newNodo->prev = tmp;
+		size++;
 		return true;
 	}
 
@@ -104,9 +105,10 @@ public:
 		}
 		newNodo->dato = dato;
 
-		// caso en el que la lista esté vacía
+		// caso en el que la lista estï¿½ vacï¿½a
 		if (!head) {
 			head = newNodo;
+			size++;
 			return true;
 		}
 
@@ -115,6 +117,7 @@ public:
 			newNodo->next = head;
 			head->prev = newNodo;
 			head = newNodo;
+			size++;
 			return true;
 		}
 
@@ -124,10 +127,11 @@ public:
 			tmp = tmp->next;
 		}
 
-		// caso de inserción en último nodo
+		// caso de inserciï¿½n en ï¿½ltimo nodo
 		if (tmp->next == nullptr && dato > tmp->dato) {
 			tmp->next = newNodo;
 			newNodo->prev = tmp;
+			size++;
 			return true;
 		}
 
@@ -137,6 +141,7 @@ public:
 		newNodo->prev = anterior;
 		tmp->prev = newNodo;
 		anterior->next = newNodo;
+		size++;
 		return true;
 	}
 
@@ -146,7 +151,7 @@ public:
 			head = tmp->next;
 			delete tmp;
 			tmp = nullptr;
-
+			size--;
 			return true;
 		}
 
@@ -164,17 +169,19 @@ public:
 				eliminar->prev = current;
 				delete eliminar;
 				eliminar = nullptr;
+				size--;
 				return true;
 			}
 		}
 		return false;
 	}
+
 	bool borrarInicio() {
 		NodoLista<T>* tmp = head;
 		head = tmp->next;
 		delete tmp;
 		tmp = nullptr;
-
+		size--;
 		return true;
 	}
 
@@ -186,6 +193,7 @@ public:
 				NodoLista<T>* pasado = current->prev;
 				pasado->next = tmp;
 				tmp->prev = pasado;
+				size--;
 				delete current;
 				current = nullptr;
 			}
@@ -194,6 +202,7 @@ public:
 				pasado->next = nullptr;
 				delete current;
 				current = nullptr;
+				size--;
 				return true;
 			}
 			else if (tmp == nullptr) {
@@ -205,6 +214,15 @@ public:
 	}
 
 	int getSize() {
+		int size = 0;
+		if (!head) {
+			return 0;
+		}
+		NodoLista<T>* tmp = head;
+		while (tmp) {
+			size++;
+			tmp = tmp->next;
+		}
 		return size;
 	}
 
@@ -229,5 +247,61 @@ public:
 
 		// se devuelve la referencia del dato del tmp
 		return &tmp->dato;
+	}
+
+	// a diferencia del pasado, este lo busca por el dato en lugar de ï¿½ndice
+	T* buscarApuntadorNodo(T dato) {
+		NodoLista<T>* tmp = head;
+
+		while (tmp) {
+			if (tmp->dato == dato) {
+				return &(tmp->dato);
+			}
+			else {
+				tmp = tmp->next;
+			}
+		}
+
+		return nullptr;
+	}
+
+	// ayuda a la encapsulacion y va a ayudar a iterar
+	class Iterator {
+	private:
+		NodoLista<T>* current;
+
+	public:
+		Iterator(NodoLista<T>* nodo) : current(nodo) {
+		}
+
+		// desreferencia y se puede acceder al dato
+		T& operator * () {
+			return current->dato;
+		}
+
+		// incrementa el iterador
+		Iterator& operator ++ () {
+			if (current)
+				current = current->next;
+			return *this;
+		}
+
+		// comparaciï¿½n normalitos
+		bool operator == (const Iterator& other) const {
+			return current == other.current;
+		}
+		bool operator != (const Iterator& other) const {
+			return current != other.current;
+		}
+	};
+
+	// da el inicio
+	Iterator begin() {
+		return Iterator(head);
+	}
+
+	// da el final con nullptr
+	Iterator end() {
+		return Iterator(nullptr);
 	}
 };
